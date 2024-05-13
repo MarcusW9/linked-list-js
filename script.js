@@ -1,5 +1,3 @@
-// List 
-
 class LinkedList {
     constructor(head = null) {
         this.head = head
@@ -131,6 +129,55 @@ class LinkedList {
         return string
     }
 
+    insertAt(value, index) {
+        let node = this.head
+        let prev = null
+        let next = this.head.next
+        let currentIndex = 0
+
+        if (index === 0) {
+            this.head = value
+            value.next = node
+            return
+        }
+
+        while (currentIndex < index) {
+            prev = node
+            node = next
+            next = node.next
+
+            currentIndex++
+        }
+
+        if (currentIndex === index) {
+            prev.next = value
+            value.next = node
+        }
+    }
+
+    removeAt(index) {
+        let node = this.head
+        let prev = null
+        let next = this.head.next
+        let currentIndex = 0
+
+        if (index === 0) {
+            this.head = next
+            return
+        }
+
+        while (currentIndex < index) {
+            prev = node
+            node = next
+            next = node.next
+
+            currentIndex++
+        }
+
+        if (currentIndex === index) {
+            prev.next = next
+        }
+    }
 }
 
 class Node {
@@ -141,16 +188,16 @@ class Node {
 }
 
 
+// Testing
+
+// Create (node1) -> (node2) -> (node3)
 let node1 = new Node("one")
 let node2 = new Node("two")
 let node3 = new Node("three")
 node1.next = node2
 node2.next = node3
 
+// myList
 let myList = new LinkedList(node1)
 
-
-// let node0 = new Node("zero")
-// myList.prependValue(node0)
-
-console.log(myList)
+let test = new Node("test")
